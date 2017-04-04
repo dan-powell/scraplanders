@@ -68,6 +68,11 @@ class Character extends Model
     * Attributes
     ****************/
 
+    public function getNameAttribute($value)
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function getStatsAttribute($value)
     {
         $array = [];

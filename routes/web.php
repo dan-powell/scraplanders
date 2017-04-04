@@ -22,3 +22,11 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('characters', 'CharacterController');
 Route::resource('vehicles', 'VehicleController');
+
+
+Route::group(['prefix' => 'action', 'middleware' => 'auth'], function () {
+
+    Route::get('raid', 'Actions\RaidActionController@setup')->name('action.raid');
+    Route::post('raid', 'Actions\RaidActionController@enact')->name('action.raid.enact');
+
+});

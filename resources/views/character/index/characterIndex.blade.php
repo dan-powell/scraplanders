@@ -14,7 +14,7 @@
                             {{ $character->firstname }}
                             {{ isset($character->nickname) ? '"'.$character->nickname.'"' : '' }}
                             {{ $character->lastname }}
-                        </a></p>
+                        </a> <span class="badge">{{ $character->hp }}</span></p>
                     @empty
                         <p>No characters</p>
                     @endforelse
