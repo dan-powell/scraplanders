@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Character extends Model
 {
+    use \App\Traits\ExperienceTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -19,30 +20,31 @@ class Character extends Model
         'dob',
 
         'strength',
-        //'toughness',
+        'toughness',
         'constitution',
         'dexterity',
         'intelligence',
-        //'wisdom',
-        //'charisma',
-        //'willpower',
+        'wisdom',
+        'charisma',
+        'willpower',
         'perception',
-        //'luck',
+        'luck',
 
         'hp',
-        //'hp_max', // NOTE maybe max HP is taken from a combo of other stats?
-
         'experience',
+        // 'hp_max', // NOTE maybe max HP is taken from a combo of other stats?
 
         // NOTE Implement health effects
-        // 'healthiness',
-        // 'hunger',
-        // 'thirst',
-        // 'radiation',
+        'heath',
+        'mood',
+        'hunger',
+        'thirst',
+        'rads',
 
         // IDEA Alignment can be a sliding scale of coordinates?
-        // 'lawfulness',
-        // 'goodness',
+        'lawfulness',
+        'goodness',
+        //'temperment',
 
         // IDEA templates provide a structure for distributing stat points when leveling up
         // 'templates'
@@ -73,7 +75,7 @@ class Character extends Model
         return $this->firstname . ' ' . $this->lastname;
     }
 
-    public function getStatsAttribute($value)
+    public function getStatsAttribute()
     {
         $array = [];
         foreach(config('character.stats') as $key => $stat) {
@@ -81,6 +83,16 @@ class Character extends Model
             $array[$key]['value'] = $this->$key;
         }
         return collect($array);
+    }
+
+    public function getLevelAttribute()
+    {
+        return $this->getLevelFromExperience($this->experience);
+    }
+
+    public function getNextLevelExperienceAttribute()
+    {
+        return $this->getExperienceRequiredNextLevel($this->experience);
     }
 
 

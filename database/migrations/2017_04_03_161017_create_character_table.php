@@ -23,29 +23,29 @@ class CreateCharacterTable extends Migration
             $table->date('dob');
 
             $table->tinyInteger('strength')->unsigned();
-            //$table->tinyInteger('toughness')->unsigned();
+            $table->tinyInteger('toughness')->unsigned();
             $table->tinyInteger('constitution')->unsigned();
             $table->tinyInteger('dexterity')->unsigned();
             $table->tinyInteger('intelligence')->unsigned();
-            //$table->tinyInteger('wisdom')->unsigned();
-            //$table->tinyInteger('charisma')->unsigned();
-            //$table->tinyInteger('willpower')->unsigned();
+            $table->tinyInteger('wisdom')->unsigned();
+            $table->tinyInteger('charisma')->unsigned();
+            $table->tinyInteger('willpower')->unsigned();
             $table->tinyInteger('perception')->unsigned();
-            //$table->tinyInteger('luck')->unsigned();
+            $table->tinyInteger('luck')->unsigned();
 
             $table->integer('experience')->unsigned();
 
             $table->tinyInteger('hp')->unsigned();
-            //$table->tinyInteger('hp_max')->unsigned();
 
-            //$table->tinyInteger('healthiness')->unsigned();
-            //$table->tinyInteger('hunger')->unsigned();
-            //$table->tinyInteger('thirst')->unsigned();
-            //$table->tinyInteger('radiation')->unsigned();
+            $table->tinyInteger('health')->unsigned();
+            $table->tinyInteger('mood')->unsigned();
+            $table->tinyInteger('hunger')->unsigned();
+            $table->tinyInteger('thirst')->unsigned();
+            $table->tinyInteger('rads')->unsigned();
 
-            // $table->tinyInteger('lawfulness');
-            // $table->tinyInteger('goodness');
-            
+            $table->tinyInteger('lawfulness');
+            $table->tinyInteger('goodness');
+
             // $table->string('template');
 
             $table->timestamps();

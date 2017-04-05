@@ -8,9 +8,9 @@ return [
         'strength' => [
             'name' => 'Strength'
         ],
-        // 'toughness' => [
-        //     'name' => 'Toughness'
-        // ],
+        'toughness' => [
+            'name' => 'Toughness'
+        ],
         'constitution' => [
             'name' => 'Consitution'
         ],
@@ -20,22 +20,29 @@ return [
         'intelligence' => [
             'name' => 'Intelligence'
         ],
-        // 'wisdom' => [
-        //     'name' => 'Wisdom'
-        // ],
-        // 'charisma' => [
-        //     'name' => 'Charisma'
-        // ],
-        // 'willpower' => [
-        //     'name' => 'Willpower'
-        // ],
+        'wisdom' => [
+            'name' => 'Wisdom'
+        ],
+        'charisma' => [
+            'name' => 'Charisma'
+        ],
+        'willpower' => [
+            'name' => 'Willpower'
+        ],
         'perception' => [
             'name' => 'Perception'
         ],
-        // 'luck' => [
-        //     'name' => 'Luck'
-        // ],
+        'luck' => [
+            'name' => 'Luck'
+        ],
     ],
+
+
+    'experience' => [
+        // The basis for 
+        'constant' => 0.3, // Do not chnage this value without first re-distributing all stat points.
+
+    ]
 
 
     // IDEA templates provide a structure for distributing stat points when leveling up via percentage
