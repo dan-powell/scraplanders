@@ -10,21 +10,6 @@ class Character extends Model
     use \App\Traits\ExperienceTrait;
     use \App\Traits\HealthTrait;
 
-    protected $healthRepo;
-
-    // public function __construct(HealthRepository $HealthRepository)
-    // {
-    //     $this->healthRepo = $HealthRepository;
-    // }
-
-
-
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'firstname',
         'lastname',
@@ -44,7 +29,6 @@ class Character extends Model
 
         'hp',
         'experience',
-        // 'hp_max', // NOTE maybe max HP is taken from a combo of other stats?
 
         // NOTE Implement health effects
         'heath',
@@ -81,11 +65,13 @@ class Character extends Model
     * Attributes
     ****************/
 
+    // The full name
     public function getNameAttribute($value)
     {
         return $this->firstname . ' ' . $this->lastname;
     }
 
+    // Returns just the stats of the character
     public function getStatsAttribute()
     {
         $array = [];
@@ -106,6 +92,7 @@ class Character extends Model
         return $this->getExperienceRequiredNextLevel($this->experience);
     }
 
+    // Returns HP limited by the maximum
     public function getHpAttribute($value)
     {
         return min($value, $this->getMaxHp($this->attributes));
