@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Character extends Model
 {
     use \App\Traits\ExperienceTrait;
+    use \App\Traits\HealthTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -95,6 +96,15 @@ class Character extends Model
         return $this->getExperienceRequiredNextLevel($this->experience);
     }
 
+    public function getHpAttribute($value)
+    {
+        return min($value, $this->getMaxHp($this));
+    }
+
+    public function getMaxHpAttribute()
+    {
+        return $this->getMaxHp($this);
+    }
 
 
 }

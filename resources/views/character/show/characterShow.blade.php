@@ -80,6 +80,41 @@
                 </div>
             </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Health</strong></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4 text-right"><strong>HP</strong></div>
+                        <div class="col-xs-8">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger"
+                                    role="progressbar"
+                                    aria-valuenow="{{ $stat['value'] }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="{{ $character->max_Hp }}"
+                                    style="width: {{ $character->hp/ $character->max_Hp * 100 }}%;">
+                                    {{ $character->hp }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 text-right">
+                            Max HP:
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>{{ $character->max_Hp }}</strong>
+                        </div>
+                        <div class="col-xs-3 text-right">
+                            HP:
+                        </div>
+                        <div class="col-xs-3">
+                            <strong>{{ $character->hp }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </div>

@@ -6,13 +6,16 @@ return [
 
     'stats' => [
         'strength' => [
-            'name' => 'Strength'
+            'name' => 'Strength',
+            'health_constant' => 0.3
         ],
         'toughness' => [
-            'name' => 'Toughness'
+            'name' => 'Toughness',
+            'health_constant' => 0.2
         ],
         'constitution' => [
-            'name' => 'Consitution'
+            'name' => 'Consitution',
+            'health_constant' => 0.4
         ],
         'dexterity' => [
             'name' => 'Dexterity'
@@ -27,7 +30,8 @@ return [
             'name' => 'Charisma'
         ],
         'willpower' => [
-            'name' => 'Willpower'
+            'name' => 'Willpower',
+            'health_constant' => 0.1
         ],
         'perception' => [
             'name' => 'Perception'
@@ -39,7 +43,7 @@ return [
 
 
     'experience' => [
-        // The basis for 
+        // The basis for
         'constant' => 0.3, // Do not chnage this value without first re-distributing all stat points.
 
     ]
