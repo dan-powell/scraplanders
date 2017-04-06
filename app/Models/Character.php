@@ -3,11 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\HealthRepository;
 
 class Character extends Model
 {
     use \App\Traits\ExperienceTrait;
     use \App\Traits\HealthTrait;
+
+    protected $healthRepo;
+
+    // public function __construct(HealthRepository $HealthRepository)
+    // {
+    //     $this->healthRepo = $HealthRepository;
+    // }
+
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -66,7 +77,6 @@ class Character extends Model
 		return $this->belongsTo('App\Models\Group');
 	}
 
-
     /****************
     * Attributes
     ****************/
@@ -98,12 +108,12 @@ class Character extends Model
 
     public function getHpAttribute($value)
     {
-        return min($value, $this->getMaxHp($this));
+        return min($value, $this->getMaxHp($this->attributes));
     }
 
     public function getMaxHpAttribute()
     {
-        return $this->getMaxHp($this);
+        return $this->getMaxHp($this->attributes);
     }
 
 

@@ -3,20 +3,20 @@
 trait ExperienceTrait
 {
 
-    public function getLevelFromExperience($experience)
+    static function getLevelFromExperience($experience)
     {
         return floor(config('character.experience.constant') * sqrt($experience));
     }
 
-    public function getExperienceFromLevel($level)
+    static function getExperienceFromLevel($level)
     {
         //return $level^2 / config('character.experience.constant');
         return round(pow($level / config('character.experience.constant'), 2));
     }
 
-    public function getExperienceLevels($level, $range = 3)
+    static function getExperienceLevels($level, $range = 3)
     {
-        $experience = $this->getExperienceFromLevel($level);
+        $experience = self::getExperienceFromLevel($level);
 
         $levels = [$level => $experience];
 
@@ -27,10 +27,10 @@ trait ExperienceTrait
 
             // Add a
             $up = $level + $i;
-            $levels = $levels + [$up => $this->getExperienceFromLevel($up)];
+            $levels = $levels + [$up => self::getExperienceFromLevel($up)];
 
             $down = $level - $i;
-            $levels = [$down => $this->getExperienceFromLevel($down)] + $levels;
+            $levels = [$down => self::getExperienceFromLevel($down)] + $levels;
         }
 
         //dd($levels);
@@ -39,17 +39,37 @@ trait ExperienceTrait
 
     }
 
-    public function getExperienceRequiredNextLevel($experience)
+    static function getExperienceRequiredNextLevel($experience)
     {
 
-        $current_level = $this->getLevelFromExperience($experience);
+        $current_level = self::getLevelFromExperience($experience);
 
         $next_level = $current_level + 1;
 
-        $next_experience = $this->getExperienceFromLevel($next_level);
+        $next_experience = self::getExperienceFromLevel($next_level);
 
         return round($next_experience - $experience);
 
     }
+
+
+    static function distributePoints($points = 1)
+	{
+
+        $stats = config('character.stats');
+
+        $stats_array = array_map(function() { return 0; }, $stats);
+
+
+        for($i = 0; $i < $points; $i++) {
+            // Choose a random stats
+            $stat = array_rand($stats_array);
+            $stats_array[$stat] = $stats_array[$stat] + 1;
+        }
+
+        return $stats_array;
+
+		//return
+	}
 
 }

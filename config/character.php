@@ -45,6 +45,7 @@ return [
     'experience' => [
         // The basis for
         'constant' => 0.3, // Do not chnage this value without first re-distributing all stat points.
+        'stats_per_level' => 1
 
     ]
 

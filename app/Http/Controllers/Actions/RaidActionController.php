@@ -19,9 +19,6 @@ class RaidActionController extends Controller
         $this->repository = $RaidActionRepository;
     }
 
-
-
-
     /**
      * Show the unit index
      *
