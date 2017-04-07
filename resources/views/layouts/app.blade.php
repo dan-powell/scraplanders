@@ -96,6 +96,10 @@
             </div>
         </nav>
 
+        <div class="container" style="max-height: 300px; overflow: scroll;">
+            {!! Notification::showAll() !!}
+        </div>
+
         @yield('content')
     </div>
 

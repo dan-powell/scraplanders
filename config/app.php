@@ -180,7 +180,8 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-
+        Krucas\Notification\NotificationServiceProvider::class,
+        //Krucas\Notification\Middleware\NotificationMiddleware::class,
     ],
 
     /*
@@ -233,6 +234,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Notification' => Krucas\Notification\Facades\Notification::class,
     ],
 
 ];

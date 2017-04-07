@@ -89,6 +89,8 @@ class RaidActionRepository
                         $raider_hits++;
                     }
 
+
+
                 }
             }
 
@@ -165,6 +167,7 @@ class RaidActionRepository
 
         if($damage > 0) {
             $this->damageCharacter($defender);
+            \Notification::successInstant($attacker->firstname . ' hit ' . $defender->firstname . ' for ' . $damage);
             return true;
         } else {
             return false;
