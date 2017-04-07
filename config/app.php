@@ -177,11 +177,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\ViewComposerServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
-        //Krucas\Notification\Middleware\NotificationMiddleware::class,
+
     ],
 
     /*

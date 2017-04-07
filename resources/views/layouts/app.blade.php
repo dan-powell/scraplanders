@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -44,8 +45,21 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (!Auth::guest())
-                            <li><a href="{{ route('characters.index') }}">Characters</a></li>
-                            <li><a href="{{ route('vehicles.index') }}">Vehicles</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    <span class="fa fa-mail-forward"></span> Actions <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <li><a href="{{ route('action.raid') }}"><span class="fa fa-box"></span> Raid</a></li>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ route('group.own') }}"><span class="fa fa-users"></span> My Group</a></li>
+                            <li><a href="{{ route('group.index') }}"><span class="fa fa-users"></span> Groups</a></li>
+                            <li><a href="{{ route('characters.index') }}"><span class="fa fa-user"></span> Characters</a></li>
+                            <li><a href="{{ route('vehicles.index') }}"><span class="fa fa-car"></span> Vehicles</a></li>
                         @endif
                     </ul>
 
@@ -53,17 +67,7 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         @if (!Auth::guest())
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Actions <span class="caret"></span>
-                                </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <li><a href="{{ route('action.raid') }}">Raid</a></li>
-                                    </li>
-                                </ul>
-                            </li>
                         @endif
 
                         <!-- Authentication Links -->
@@ -71,6 +75,15 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+
+
+                        <!--
+                        'scrap',
+                        'food',
+                        'water',
+                        'fuel' -->
+                            @include('layouts.resources')
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

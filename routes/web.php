@@ -19,14 +19,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::group(['middleware' => 'auth'], function () {
 
-Route::resource('characters', 'CharacterController');
-Route::resource('vehicles', 'VehicleController');
+    Route::get('group/own', 'GroupController@own')->name('group.own');
+    Route::resource('group', 'GroupController');
 
+    Route::resource('characters', 'CharacterController');
+    Route::resource('vehicles', 'VehicleController');
 
-Route::group(['prefix' => 'action', 'middleware' => 'auth'], function () {
-
-    Route::get('raid', 'Actions\RaidActionController@setup')->name('action.raid');
-    Route::post('raid', 'Actions\RaidActionController@enact')->name('action.raid.enact');
+    Route::group(['prefix' => 'action', 'middleware' => 'auth'], function () {
+        Route::get('raid', 'Actions\RaidActionController@setup')->name('action.raid');
+        Route::post('raid', 'Actions\RaidActionController@enact')->name('action.raid.enact');
+    });
 
 });

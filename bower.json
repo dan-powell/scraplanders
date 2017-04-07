@@ -1,0 +1,22 @@
+{
+  "name": "scraplanders",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Dan Powell <dan@autumnrain.co.uk>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dan-powell/scraplanders",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.7.0",
+    "fff": "^0.6.1"
+  }
+}

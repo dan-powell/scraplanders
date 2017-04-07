@@ -8,3 +8,5 @@
 Homestead.json
 Homestead.yaml
 .env
+/node_modules
+/bower_components
