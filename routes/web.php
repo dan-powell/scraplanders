@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/home', 'HomeController@index')->name('dashboard');
+    Route::get('addCharacter', 'HomeController@addCharacter')->name('dashboard.addcharacter');
 
     Route::get('group/own', 'GroupController@own')->name('group.own');
     Route::resource('group', 'GroupController');

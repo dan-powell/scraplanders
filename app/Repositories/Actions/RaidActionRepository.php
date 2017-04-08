@@ -34,8 +34,9 @@ class RaidActionRepository
         $weight = $this->weighting($per, $dex);
 
         // Now convert these values to 0-1
-        $weight = ($weight/2) + .5;
-
+        if($weight > 0) {
+            $weight = ($weight/2) + .5;
+        }
 
 
         // And we have the total number of defenders alerted
@@ -158,7 +159,14 @@ class RaidActionRepository
     private function weighting($first, $last)
     {
         // Find weighting between -1 & 1
-        return ($first - $last) / max([$first,$last]);
+        $value =  ($first - $last);
+
+        if($value != 0) {
+            $value = $value / max([$first,$last]);
+        }
+
+        return $value;
+
     }
 
     private function fight($attacker, $defender)

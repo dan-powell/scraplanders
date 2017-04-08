@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Group;
 
 class HomeController extends Controller
 {
@@ -25,4 +26,20 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+
+
+    public function addCharacter()
+    {
+        $group = \Auth::user()->group;
+
+        $character = factory(\App\Models\Character::class)->create([
+            'group_id' => $group->id
+        ]);
+
+        \Notification::successInstant($character->name . ' created.');
+
+        return view('home');
+    }
+
 }

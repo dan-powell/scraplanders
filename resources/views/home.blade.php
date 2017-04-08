@@ -9,6 +9,8 @@
 
                 <div class="panel-body">
                     You are logged in!
+                    <br/>
+                    <a href="{{ route('dashboard.addcharacter') }}">Add Character</a>
                 </div>
             </div>
         </div>

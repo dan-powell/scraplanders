@@ -45,6 +45,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if (!Auth::guest())
+                            <li><a href="{{ route('dashboard') }}"><span class="fa fa-list"></span> Dash</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <span class="fa fa-mail-forward"></span> Actions <span class="caret"></span>

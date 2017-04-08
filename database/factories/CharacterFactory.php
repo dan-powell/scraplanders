@@ -63,3 +63,10 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
 
     ];
 });
+
+$factory->state(App\Models\Character::class, 'fart', function ($faker) {
+    return [
+        'name' => 'New User',
+        'email' => 'new@example.com'
+    ];
+});
