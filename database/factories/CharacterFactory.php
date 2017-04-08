@@ -12,14 +12,8 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
     );
 
 
-    $experience = $faker->numberBetween(0, 9000);
-
-    $level = App\Models\Character::getLevelFromExperience($experience);
-
-    $points = $level * config('character.experience.stats_per_level');
-
+    $points = $faker->numberBetween(10, 20);
     $stats = App\Models\Character::distributePoints($points);
-
     $hp_max = App\Models\Character::getMaxHp($stats);
 
     return [
@@ -45,10 +39,7 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
         'perception' => $stats['perception'],
         'luck' => $stats['luck'],
 
-        'experience' => $experience,
-
         'hp' => $faker->numberBetween($hp_max/2, $hp_max),
-
         'health' => $faker->numberBetween(0, 10),
         'mood' => $faker->numberBetween(0, 10),
         'hunger' => $faker->numberBetween(0, 10),

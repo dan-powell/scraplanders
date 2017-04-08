@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Repositories\HealthRepository;
 
 class Character extends Model
 {
-    use \App\Traits\ExperienceTrait;
-    use \App\Traits\HealthTrait;
 
     protected $fillable = [
         'firstname',
@@ -27,10 +24,8 @@ class Character extends Model
         'perception',
         'luck',
 
-        'hp',
-        'experience',
-
         // NOTE Implement health effects
+        'hp',
         'heath',
         'mood',
         'hunger',
@@ -77,19 +72,15 @@ class Character extends Model
         $array = [];
         foreach(config('character.stats') as $key => $stat) {
             $array[$key] = $stat;
-            $array[$key]['value'] = $this->$key;
+            $array[$key]['value'] = round($this->$key);
         }
         return collect($array);
     }
 
     public function getLevelAttribute()
     {
-        return $this->getLevelFromExperience($this->experience);
-    }
-
-    public function getNextLevelExperienceAttribute()
-    {
-        return $this->getExperienceRequiredNextLevel($this->experience);
+        $stats = $this->getStatsAttribute();
+        return $stats->sum('value');
     }
 
     // Returns HP limited by the maximum
@@ -103,5 +94,47 @@ class Character extends Model
         return $this->getMaxHp($this->attributes);
     }
 
+
+    // Distributes points to stats randomly
+    static function distributePoints($points = 1)
+	{
+        $stats = config('character.stats');
+        $stats_array = array_map(function() { return 0; }, $stats);
+        for($i = 0; $i < $points; $i++) {
+            // Choose a random stats
+            $stat = array_rand($stats_array);
+            $stats_array[$stat] = $stats_array[$stat] + 1;
+        }
+        return $stats_array;
+	}
+
+    // Get the maximum HP based on character stats
+    // Accepts an array of character stats & values
+    // Returns integer
+    static function getMaxHp($attributes)
+    {
+        /* Each stat with a 'health_constant' multiplies the stat itself
+        For example:
+        (strength * 0.3) +
+        (toughness * 0.2) +
+        (constitution * 0.4) +
+        (willpower * 0.1)
+        * multiplier = max_hp
+        */
+
+        $base = 0;
+        // Loop through each stat type
+        foreach(config('character.stats') as $key => $stat) {
+            // Does the stat type have a constant we can use?
+            if (isset($stat['health_constant']) && $stat['health_constant'] > 0) {
+                // Add the stat value by itself
+                $base += $stat['health_constant'] * $attributes[$key];
+            }
+        }
+        // Times by the multiplyer...
+        $base = $base * config('character.health.multiplier');
+        // Don't forget to round the number
+        return round($base);
+    }
 
 }

@@ -23,24 +23,22 @@ class RaidActionRepository
 
         // INFILTRATION - find the total number of enemy characters that are alerted
 
-        //raider DEX vs group PER
 
-        // Get total DEX
-        $dex = $raiders->sum('dexterity');
 
-        // Get total PER
-        $per = $defenders->sum('perception');
 
-        $weight = $this->weighting($per, $dex);
-
-        // Now convert these values to 0-1
-        if($weight > 0) {
-            $weight = ($weight/2) + .5;
+        foreach ($raiders as $raider) {
+            foreach ($defenders as $defender) {
+                $this->alertCheck($raider, $defender) ;
+            }
         }
 
 
-        // And we have the total number of defenders alerted
-        $alerted = intval(round(count($defenders) * $weight, 0)); // Don't forget to roundup the numbers
+        $alerted = 0;
+        foreach ($defenders as $defender) {
+            if($defender->alerted) {
+                $alerted++;
+            }
+        }
 
         // TODO Affect the weighting based on number of raiders i.e, it gets easier to wake defenders the more raiders are in group.
         // TODO Perhaps affect weighting based on time of day. i.e easier at night
@@ -99,7 +97,7 @@ class RaidActionRepository
             foreach ($alert_defenders as $defender) {
                 foreach ($raiders as $raider) {
 
-                    $hit = $this->fight($defender, $raider);
+                    $hit = $this->fight($raider, $defender);
 
                     if($hit) {
                         $defender_hits++;
@@ -138,11 +136,9 @@ class RaidActionRepository
 
 
         return collect([
-            'defenders' => $defenders,
-            'raiders' => $raiders,
+            'defenders' => $defenders->toArray(),
+            'raiders' => $raiders->toArray(),
             'infiltration' => [
-                'dexterity' => $dex,
-                'perception' => $per,
                 'defenders' => $alert_defenders
             ],
             'fight' => [
@@ -184,10 +180,32 @@ class RaidActionRepository
     }
 
 
+    private function alertCheck($attacker, $defender)
+    {
+        $alert = $this->weighting($attacker->dexterity, $defender->perception);
+
+        $defender->alertness = $alert;
+
+        if($defender->alertness) {
+
+        }
+
+        if($defender->alertness > 0) {
+            $defender->alerted = true;
+        }
+
+    }
+
+
     private function damageCharacter($character)
     {
-        $character->hp = $character->hp - 1;
-        $character->save();
+
+        $flight = \App\Models\Character::find(1);
+
+        $flight->hp = $character->hp - 1;
+
+        $flight->save();
+
     }
 
 }

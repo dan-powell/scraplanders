@@ -22,21 +22,18 @@ class CreateCharacterTable extends Migration
             $table->string('nickname')->nullable();
             $table->date('dob');
 
-            $table->tinyInteger('strength')->unsigned();
-            $table->tinyInteger('toughness')->unsigned();
-            $table->tinyInteger('constitution')->unsigned();
-            $table->tinyInteger('dexterity')->unsigned();
-            $table->tinyInteger('intelligence')->unsigned();
-            $table->tinyInteger('wisdom')->unsigned();
-            $table->tinyInteger('charisma')->unsigned();
-            $table->tinyInteger('willpower')->unsigned();
-            $table->tinyInteger('perception')->unsigned();
-            $table->tinyInteger('luck')->unsigned();
-
-            $table->integer('experience')->unsigned();
+            $table->decimal('strength', 3)->unsigned();
+            $table->decimal('toughness', 3)->unsigned();
+            $table->decimal('constitution', 3)->unsigned();
+            $table->decimal('dexterity', 3)->unsigned();
+            $table->decimal('intelligence', 3)->unsigned();
+            $table->decimal('wisdom', 3)->unsigned();
+            $table->decimal('charisma', 3)->unsigned();
+            $table->decimal('willpower', 3)->unsigned();
+            $table->decimal('perception', 3)->unsigned();
+            $table->decimal('luck', 3)->unsigned();
 
             $table->tinyInteger('hp')->unsigned();
-
             $table->tinyInteger('health')->unsigned();
             $table->tinyInteger('mood')->unsigned();
             $table->tinyInteger('hunger')->unsigned();

@@ -19,7 +19,6 @@
                 <!-- List group -->
                   <ul class="list-group">
                     <li class="list-group-item">Alerted Defenders: {{ count($results['infiltration']['defenders']) }} / {{ count($results['defenders']) }}</li>
-                    <li class="list-group-item">Dexterity: {{ $results['infiltration']['dexterity'] }} vs Perception: {{ $results['infiltration']['perception'] }}</li>
                     <li class="list-group-item">Hits: {{ $results['fight']['hits'] }}</li>
                     <li class="list-group-item">Raider Hits: {{ $results['fight']['raider_hits'] }} vs Defender Hits: {{ $results['fight']['defender_hits'] }}</li>
                     <li class="list-group-item">Success: {{ $results['fight']['success'] }}</li>

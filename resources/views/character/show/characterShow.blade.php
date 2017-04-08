@@ -12,7 +12,7 @@
             </h2>
 
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>About</strong></div>
+                <div class="panel-heading"><strong>Level {{ $character->level }}</strong></div>
                 <!-- List group -->
                 <ul class="list-group">
                     <li class="list-group-item">Date of Birth: <strong>{{ $character->dob->format('D jS F, Y') }}</strong></li>
@@ -44,41 +44,6 @@
             </div>
 
 
-            <div class="panel panel-default">
-                <div class="panel-heading"><strong>Experience</strong></div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-3 text-right">
-                            Experience Points:
-                        </div>
-                        <div class="col-xs-1">
-                            <strong>{{ $character->experience }}</strong>
-                        </div>
-                        <div class="col-xs-3 text-right">
-                            Level:
-                        </div>
-                        <div class="col-xs-1">
-                            <strong>{{ $character->level }}</strong>
-                        </div>
-                        <div class="col-xs-3 text-right">
-                            Exp reach next lvl:
-                        </div>
-                        <div class="col-xs-1">
-                            <strong>{{ $character->nextLevelExperience }}</strong>
-                        </div>
-                    </div>
-                    @foreach($levels as $key => $level)
-                        <div class="row">
-                            <div class="col-xs-3 text-right">
-                                Level {{ $key }}:
-                            </div>
-                            <div class="col-xs-3">
-                                <strong>{{ $level }} @if($key == $character->level){{ 'Current' }} @endif</strong>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading"><strong>Health</strong></div>

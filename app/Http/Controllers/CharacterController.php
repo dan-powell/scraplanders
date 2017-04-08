@@ -8,8 +8,6 @@ use App\Models\Character;
 class CharacterController extends Controller
 {
 
-    use \App\Traits\ExperienceTrait;
-
     /**
      * Create a new controller instance.
      *
@@ -41,7 +39,6 @@ class CharacterController extends Controller
         return view('character.show.characterShow')->with([
             'character' => $character,
             'max_stat' => $character->stats->pluck('value')->max(),
-            'levels' => $this->getExperienceLevels($character->level)
         ]);
     }
 
