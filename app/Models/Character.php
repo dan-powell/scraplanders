@@ -94,6 +94,54 @@ class Character extends Model
         return $this->getMaxHp($this->attributes);
     }
 
+    public function getLawfulnessNameAttribute()
+    {
+        if($this->lawfulness > -0.33) {
+            if($this->lawfulness > 0.33) {
+                $lawfulness = 'Lawful';
+            } else {
+                $lawfulness = 'Neutral';
+            }
+        } else {
+            $lawfulness = 'Chaotic';
+        }
+        return $lawfulness;
+    }
+
+    public function getGoodnessNameAttribute()
+    {
+        if($this->goodness > -0.33) {
+            if($this->goodness > 0.33) {
+                $goodness = 'Good';
+            } else {
+                $goodness = 'Neutral';
+            }
+        } else {
+            $goodness = 'Evil';
+        }
+        return $goodness;
+    }
+
+    public function getAlignmentAttribute()
+    {
+        if ($this->lawfulnessName == $this->goodnessName) {
+            return 'True ' . $this->lawfulnessName;
+        } else {
+            return $this->lawfulnessName . ' ' . $this->goodnessName;
+        }
+    }
+
+
+
+
+
+
+
+
+    /****************
+    * Handy Methods
+    ****************/
+
 
     // Distributes points to stats randomly
     static function distributePoints($points = 1)

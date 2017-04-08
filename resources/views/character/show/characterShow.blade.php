@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach($character->stats as $stat)
-                        <div class="col-xs-4 text-right"><strong>{{ $stat['name'] }}</strong></div>
+                        <div class="col-xs-4 text-right">{{ $stat['name'] }}</div>
                         <div class="col-xs-8">
                             <div class="progress">
                                 <div class="progress-bar"
@@ -43,14 +43,12 @@
                 </div>
             </div>
 
-
-
             <div class="panel panel-default">
                 <div class="panel-heading"><strong>Health</strong></div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4 text-right"><strong>HP</strong></div>
-                        <div class="col-xs-8">
+                        <div class="col-xs-2 text-right"><strong>HP</strong></div>
+                        <div class="col-xs-7">
                             <div class="progress">
                                 <div class="progress-bar progress-bar-danger"
                                     role="progressbar"
@@ -62,24 +60,22 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-3 text-right">
-                            Max HP:
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>{{ $character->max_Hp }}</strong>
-                        </div>
-                        <div class="col-xs-3 text-right">
-                            HP:
-                        </div>
-                        <div class="col-xs-3">
-                            <strong>{{ $character->hp }}</strong>
-                        </div>
+                        <div class="col-xs-3"><strong>{{ $character->max_Hp }} max</strong></div>
                     </div>
                 </div>
             </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading"><strong>Personality</strong></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-4 text-right">Alignment</div>
+                        <div class="col-xs-8">
+                            <strong>{{ $character->alignment }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
