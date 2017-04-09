@@ -3,32 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Character;
+use App\Repositories\CharacterRepository;
 
 class CharacterController extends Controller
 {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $characterRepo;
+
+    public function __construct(CharacterRepository $characterRepo)
     {
-        $this->middleware('auth');
+        $this->characterRepo = $characterRepo;
     }
 
-    /**
-     * Show the unit index
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $user = \Auth::user();
-
         return view('character.index.characterIndex')->with([
-            'characters' => $user->group->characters
+            'characters' => $this->characterRepo->getUserCharacters()
         ]);
     }
 

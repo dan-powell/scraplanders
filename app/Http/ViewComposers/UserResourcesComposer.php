@@ -3,7 +3,7 @@
 use Illuminate\Contracts\View\View;
 use App\Models\Group;
 
-class GroupResourcesComposer {
+class UserResourcesComposer {
 
     /**
      * Create a new profile composer.
@@ -24,8 +24,6 @@ class GroupResourcesComposer {
      */
     public function compose(View $view)
     {
-        $user = \Auth::user();
-        $group = Group::where('user_id', $user->id)->first();
-        $view->with('group', $group);
+        $view->with('resources', app('resources')->getAll());
     }
 }

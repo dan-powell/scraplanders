@@ -13,7 +13,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
     {
         $this->app->view->composer(
             'layouts.resources',
-            'App\Http\ViewComposers\GroupResourcesComposer'
+            'App\Http\ViewComposers\UserResourcesComposer'
         );
     }
 }

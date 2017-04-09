@@ -11,6 +11,13 @@
                     You are logged in!
                     <br/>
                     <a href="{{ route('dashboard.addcharacter') }}">Add Character</a>
+
+
+                    {{ app('user')->getId() }}
+
+                    {{ \Auth::user()->groups }}
+
+
                 </div>
             </div>
         </div>

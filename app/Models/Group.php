@@ -28,6 +28,10 @@ class Group extends Model
         'fuel'
     ];
 
+    protected $appends = [
+        'resources'
+    ];
+
 
     /****************
      * Relationships
@@ -37,7 +41,6 @@ class Group extends Model
 	{
 		return $this->belongsTo('App\Models\User');
 	}
-
 
     public function characters()
     {
@@ -54,7 +57,15 @@ class Group extends Model
     * Attributes
     ****************/
 
-
+    // Returns just the stats of the character
+    public function getResourcesAttribute()
+    {
+        $array = [];
+        foreach(config('group.resources') as $resource) {
+            $array[$resource] = $this->$resource;
+        }
+        return collect($array);
+    }
 
 
 }

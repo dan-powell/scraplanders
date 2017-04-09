@@ -28,9 +28,31 @@ class User extends Authenticatable
     ];
 
 
-    public function group()
+    public function groups()
     {
-        return $this->hasOne('App\Models\Group');
+        return $this->hasMany('App\Models\Group');
     }
+
+
+
+
+    /****************
+    * Attributes
+    ****************/
+
+    // The full name
+    public function getFuelAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    // Age in years
+    public function getAgeAttribute()
+    {
+        return $this->dob->diffInYears(Carbon::now(), false);
+    }
+
+
+
 
 }
