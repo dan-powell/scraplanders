@@ -15,8 +15,8 @@
                 <div class="panel-heading"><strong>Level {{ $character->level }}</strong></div>
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">Date of Birth: <strong>{{ $character->dob->format('D jS F, Y') }}</strong></li>
-                    <li class="list-group-item">Age: <strong>{{ $character->dob->diffInYears(Carbon\Carbon::now(), false) }}</strong></li>
+                    <li class="list-group-item">Date of Birth: <strong>{{ $character->dob->format(config('general.date_format')) }}</strong> (Age: <strong>{{ $character->age }}</strong>)</li>
+                    <li class="list-group-item">Heft: {{ $character->heft }}</li>
                 </ul>
             </div>
 
@@ -24,17 +24,17 @@
                 <div class="panel-heading"><strong>Stats</strong></div>
                 <div class="panel-body">
                     <div class="row">
-                        @foreach($character->stats as $stat)
-                        <div class="col-xs-4 text-right">{{ $stat['name'] }}</div>
+                        @foreach($character->stats as $key => $stat)
+                        <div class="col-xs-4 text-right">@lang('character.' . $key)</div>
                         <div class="col-xs-8">
                             <div class="progress">
                                 <div class="progress-bar"
                                     role="progressbar"
-                                    aria-valuenow="{{ $stat['value'] }}"
+                                    aria-valuenow="{{ $stat }}"
                                     aria-valuemin="0"
                                     aria-valuemax="100"
-                                    style="width: {{ $stat['value']/$max_stat*100 }}%;">
-                                    {{ $stat['value'] }}
+                                    style="width: {{ $stat / $character->max_stat_value * 100 }}%; min-width: 10%;">
+                                    {{ $stat }}
                                 </div>
                             </div>
                         </div>

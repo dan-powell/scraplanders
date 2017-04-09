@@ -3,16 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Repositories\Mechanics\Utilities;
+use Carbon\Carbon;
 
 class Character extends Model
 {
 
     protected $fillable = [
+        // Details
         'firstname',
         'lastname',
         'nickname',
         'dob',
 
+        // Stats
         'strength',
         'toughness',
         'constitution',
@@ -24,14 +28,16 @@ class Character extends Model
         'perception',
         'luck',
 
+        // Health
         // NOTE Implement health effects
         'hp',
-        'heath',
+        'health',
         'mood',
         'hunger',
         'thirst',
         'rads',
 
+        // Temperment
         // IDEA Alignment can be a sliding scale of coordinates?
         'lawfulness',
         'goodness',
@@ -61,26 +67,37 @@ class Character extends Model
     ****************/
 
     // The full name
-    public function getNameAttribute($value)
+    public function getNameAttribute()
     {
         return $this->firstname . ' ' . $this->lastname;
+    }
+
+    // Age in years
+    public function getAgeAttribute()
+    {
+        return $this->dob->diffInYears(Carbon::now(), false);
     }
 
     // Returns just the stats of the character
     public function getStatsAttribute()
     {
         $array = [];
-        foreach(config('character.stats') as $key => $stat) {
-            $array[$key] = $stat;
-            $array[$key]['value'] = round($this->$key);
+        foreach(config('character.stats') as $stat) {
+            $array[$stat] = round($this->$stat);
         }
         return collect($array);
     }
 
+    public function getMaxStatValueAttribute()
+    {
+        return $this->stats->max();
+    }
+
+
     public function getLevelAttribute()
     {
         $stats = $this->getStatsAttribute();
-        return $stats->sum('value');
+        return $stats->sum();
     }
 
     // Returns HP limited by the maximum
@@ -131,58 +148,54 @@ class Character extends Model
         }
     }
 
+    public function getHeftAttribute()
+    {
+        $heft = Utilities::singleValueFromArray($this->stats, config('character.heft'));
+        return round($heft * 10);
+    }
 
+    public function getIsAdultAttribute()
+    {
+        if ($this->age >= 18) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public function getIsInjuredAttribute()
+    {
+        if ($this->hp < $this->max_hp/2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-
-
-
+    public function getIsAliveAttribute()
+    {
+        if ($this->hp >= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /****************
     * Handy Methods
     ****************/
 
 
-    // Distributes points to stats randomly
-    static function distributePoints($points = 1)
-	{
-        $stats = config('character.stats');
-        $stats_array = array_map(function() { return 0; }, $stats);
-        for($i = 0; $i < $points; $i++) {
-            // Choose a random stats
-            $stat = array_rand($stats_array);
-            $stats_array[$stat] = $stats_array[$stat] + 1;
-        }
-        return $stats_array;
-	}
-
     // Get the maximum HP based on character stats
     // Accepts an array of character stats & values
     // Returns integer
     static function getMaxHp($attributes)
     {
-        /* Each stat with a 'health_constant' multiplies the stat itself
-        For example:
-        (strength * 0.3) +
-        (toughness * 0.2) +
-        (constitution * 0.4) +
-        (willpower * 0.1)
-        * multiplier = max_hp
-        */
-
-        $base = 0;
-        // Loop through each stat type
-        foreach(config('character.stats') as $key => $stat) {
-            // Does the stat type have a constant we can use?
-            if (isset($stat['health_constant']) && $stat['health_constant'] > 0) {
-                // Add the stat value by itself
-                $base += $stat['health_constant'] * $attributes[$key];
-            }
-        }
-        // Times by the multiplyer...
-        $base = $base * config('character.health.multiplier');
-        // Don't forget to round the number
-        return round($base);
+        $hp = Utilities::singleValueFromArray($attributes, config('character.hp'));
+        return round($hp * 10);
     }
+
+
+
 
 }

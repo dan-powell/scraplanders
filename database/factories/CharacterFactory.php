@@ -11,9 +11,15 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
         ]
     );
 
-
+    // Generate the stats
     $points = $faker->numberBetween(10, 20);
-    $stats = App\Models\Character::distributePoints($points);
+    $stats_array = config('character.stats');
+    $distribution = App\Repositories\Mechanics\Utilities::distributePoints(count($stats_array), $points);
+    $stats = [];
+    for($i = 0; $i < count($stats_array); $i++) {
+        $stats[$stats_array[$i]] = $distribution[$i];
+    }
+    // Calc the max HP
     $hp_max = App\Models\Character::getMaxHp($stats);
 
     return [

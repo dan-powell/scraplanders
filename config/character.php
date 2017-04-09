@@ -5,50 +5,32 @@ return [
 
     // Various settings for character stats
     'stats' => [
-        'strength' => [
-            'name' => 'Strength',
-            // Used to 'weight' the amount of max HP generated per stat
-            'health_constant' => 0.3,
-        ],
-        'toughness' => [
-            'name' => 'Toughness',
-            'health_constant' => 0.2,
-        ],
-        'constitution' => [
-            'name' => 'Consitution',
-            'health_constant' => 0.4,
-        ],
-        'dexterity' => [
-            'name' => 'Dexterity',
-        ],
-        'intelligence' => [
-            'name' => 'Intelligence',
-        ],
-        'wisdom' => [
-            'name' => 'Wisdom',
-        ],
-        'charisma' => [
-            'name' => 'Charisma',
-        ],
-        'willpower' => [
-            'name' => 'Willpower',
-            'health_constant' => 0.1,
-        ],
-        'perception' => [
-            'name' => 'Perception',
-        ],
-        'luck' => [
-            'name' => 'Luck',
-        ],
+        'strength',
+        'toughness',
+        'constitution',
+        'dexterity',
+        'intelligence',
+        'wisdom',
+        'charisma',
+        'willpower',
+        'perception',
+        'luck'
     ],
 
-    // Experience related settings
-    'experience' => [
-        // The basis for
-        'constant' => 0.3, // Do not chnage this value without first re-distributing all stat points.
-        // Number of stat points available per level
-        'stats_per_level' => 1,
+    'hp' => [
+        'strength' => 0.2,
+        'toughness' => 0.2,
+        'constitution' => 0.5,
+        'willpower' => 0.1,
     ],
+
+    'heft' => [
+        'strength' => 0.8,
+        'toughness' => 0.1,
+        'constitution' => 0.1,
+    ],
+
+
 
     // Health related settings
     'health' => [
