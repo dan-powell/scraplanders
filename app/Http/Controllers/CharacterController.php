@@ -24,10 +24,8 @@ class CharacterController extends Controller
 
     public function show($id)
     {
-        $character = Character::findOrFail($id);
-
         return view('character.show.characterShow')->with([
-            'character' => $character,
+            'character' => $this->characterRepo->getUserCharacter($id)
         ]);
     }
 

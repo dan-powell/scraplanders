@@ -14,11 +14,17 @@ class CharacterRepository
         //$this->groupRepo = $groupRepo;
     }
 
+    // Get all characters if owned by user
     public function getUserCharacters() {
 
-        $groups = \Auth::user()->groups()->with('characters')->get();
+        return auth()->user()->characters()->get();
 
-        return $groups->pluck('characters')->flatten();
+    }
+
+    // Get specific character if owned by user
+    public function getUserCharacter($id) {
+
+        return Character::findOrFail($id);
 
     }
 

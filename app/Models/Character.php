@@ -3,11 +3,32 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
 use App\Repositories\Mechanics\Utilities;
 use Carbon\Carbon;
 
 class Character extends Model
 {
+
+    /**
+    * The "booting" method of the model.
+    *
+    * @return void
+    */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Only return users where
+        static::addGlobalScope('user', function (Builder $builder) {
+            $builder->whereHas('group', function ($builder) {
+                $builder->whereHas('user', function ($query) {
+                    $query->where('id', '=', auth()->user()->id);
+                });
+            });
+        });
+    }
 
     protected $fillable = [
         // Details
@@ -54,13 +75,18 @@ class Character extends Model
     ];
 
     /****************
-     * Relationships
-     ****************/
+    * Relationships
+    ****************/
 
     public function group()
-	{
-		return $this->belongsTo('App\Models\Group');
-	}
+    {
+        return $this->belongsTo('App\Models\Group');
+    }
+
+    public function user()
+    {
+        return $this->group->user();
+    }
 
     /****************
     * Attributes

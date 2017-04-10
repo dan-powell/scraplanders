@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Group');
     }
 
+    public function characters()
+    {
+        return $this->hasManyThrough('App\Models\Character', 'App\Models\Group');
+    }
+
 
 
 
