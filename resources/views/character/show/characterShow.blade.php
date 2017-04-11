@@ -15,7 +15,7 @@
                 <div class="panel-heading"><strong>Level {{ $character->level }}</strong></div>
                 <!-- List group -->
                 <ul class="list-group">
-                    <li class="list-group-item">Date of Birth: <strong>{{ $character->dob->format(config('general.date_format')) }}</strong> (Age: <strong>{{ $character->age }}</strong>)</li>
+                    <li class="list-group-item">Year of Birth: <strong>{{ $character->birthyear }}</strong> (Age: <strong>{{ $character->age }}</strong>)</li>
                     <li class="list-group-item">Heft: {{ $character->heft }}</li>
                 </ul>
             </div>

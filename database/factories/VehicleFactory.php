@@ -9,7 +9,7 @@ $factory->define(App\Models\Vehicle::class, function (Faker\Generator $faker) {
         'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'group_id' => function (array $post) {
-            return App\Models\Group::inRandomOrder()->first()->id;
+            return App\Models\Group::withoutGlobalScopes()->inRandomOrder()->first()->id;
         },
 	    'name' => $randomNameGen->getName(),
         'chassis' => $faker->randomElement(array_keys(config('vehicle.chassis'))),

@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('resources', 'App\Services\ResourcesService');
+        $this->app->singleton('time', 'App\Services\TimeService');
     }
 }

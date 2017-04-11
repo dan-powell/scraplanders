@@ -20,7 +20,7 @@ class CreateCharacterTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('nickname')->nullable();
-            $table->date('dob');
+            $table->smallInteger('birthyear');
 
             $table->decimal('strength', 3)->unsigned();
             $table->decimal('toughness', 3)->unsigned();
@@ -33,8 +33,8 @@ class CreateCharacterTable extends Migration
             $table->decimal('perception', 3)->unsigned();
             $table->decimal('luck', 3)->unsigned();
 
-            $table->tinyInteger('hp')->unsigned();
-            $table->tinyInteger('health')->unsigned();
+            $table->smallInteger('hp')->unsigned();
+            $table->smallInteger('health')->unsigned();
             $table->tinyInteger('mood')->unsigned();
             $table->tinyInteger('hunger')->unsigned();
             $table->tinyInteger('thirst')->unsigned();

@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\UpdateResources::class
+        Commands\UpdateResources::class,
+        Commands\UpdateTime::class
     ];
 
     /**
@@ -24,8 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('resources:update')
-                  ->everyMinute();
+        $schedule->command('resources:update')->hourly();
+
+        $schedule->command('time:update')->everyMinute();
     }
 
     /**

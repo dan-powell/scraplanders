@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Scopes\OwnedByUserScope;
 
-use App\Repositories\Mechanics\Utilities;
 use Carbon\Carbon;
+use Utilities;
 
 class Character extends Model
 {
@@ -65,7 +65,6 @@ class Character extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'dob',
     ];
 
     /****************
@@ -95,7 +94,7 @@ class Character extends Model
     // Age in years
     public function getAgeAttribute()
     {
-        return $this->dob->diffInYears(Carbon::now(), false);
+        return app('time')->year() - $this->birthyear;
     }
 
     // Returns just the stats of the character

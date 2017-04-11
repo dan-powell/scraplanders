@@ -6,30 +6,26 @@ class GroupRepository
 {
 
     // Get all if owned by user
-    public function all() {
-
+    public function all()
+    {
         return auth()->user()->groups()->get();
-
     }
 
     // Get specific if owned by user
-    public function get($id) {
-
+    public function get($id)
+    {
         return Group::findOrFail($id);
-
     }
 
     // Get any, regardless of ownership
-    public function getAny($id) {
-
+    public function getAny($id)
+    {
         return Group::withoutGlobalScopes()->findOrFail($id);
-
     }
 
-    public function allAny() {
-
+    public function allAny()
+    {
         return Group::withoutGlobalScopes()->get();
-
     }
 
 
@@ -41,13 +37,15 @@ class GroupRepository
 
         foreach($groups as $group) {
             foreach($group->resources as $key => $resource) {
-                $group->$key = $resource - 5;
+                $group->$key = $resource - 1;
+                // prevent resource going below 0;
+                if ($group->$key < 0) {
+                    $group->$key = 0;
+                }
             }
 
             $group->save();
         }
-
-
 
     }
 

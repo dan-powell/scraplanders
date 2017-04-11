@@ -1,41 +1,46 @@
 <?php namespace App\Services;
 
-use App\Models\Group;
+use App\Repositories\GroupRepository;
+
+use Redis;
 
 class ResourcesService
 {
 
-    public $user;
     public $resources;
+    public $groupRepository;
 
     //public function __construct(CartRepository $CartRepository)
-    public function __construct()
+    public function __construct(GroupRepository $GroupRepository)
     {
+        $this->groupRepository = $GroupRepository;
 
-        //$this->cartRepository = $CartRepository;
-        $this->user = \Auth::user();
-        $redis = \Redis::get('user:resources:' . $this->user->id);
+        $this->resources = unserialize(Redis::get('user:resources:' . auth()->user()->id));
 
-        if($redis) {
-            $this->resources = unserialize($redis);
-        } else {
-            $groups = Group::where('user_id', $this->user->id)->get();
-
-            $array = [];
-            foreach(config('group.resources') as $resource) {
-                $array[$resource] = $groups->sum($resource);
-            }
-
-            \Redis::set('user:resources:' . $this->user->id, serialize($array));
-
-            $this->resources = $array;
+        if(!$this->resources) {
+            $this->update();
         }
 
     }
 
-    public function getAll() {
-        return $this->resources;
+    private function update()
+    {
+        $groups = $this->groupRepository->all();
+
+        $array = [];
+        foreach(config('group.resources') as $resource) {
+            $array[$resource] = $groups->sum($resource);
+        }
+
+        Redis::set('user:resources:' . auth()->user()->id, serialize($array));
+        Redis::expire('user:resources:' . auth()->user()->id, 300);
+
+        $this->resources = $array;
     }
 
+    public function getAll()
+    {
+        return $this->resources;
+    }
 
 }

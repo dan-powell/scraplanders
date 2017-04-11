@@ -1,7 +1,6 @@
 <?php namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
-use App\Models\Group;
 
 class UserResourcesComposer {
 

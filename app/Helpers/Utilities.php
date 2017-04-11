@@ -1,10 +1,10 @@
-<?php namespace App\Repositories\Mechanics;
+<?php namespace App\Helpers;
 
 class Utilities
 {
 
     // Distributes an integer $amount amongst x number of $points
-    static function distributePoints($points, $amount = 1)
+    public static function distributePoints($points, $amount = 1)
     {
 
         $array = [];
@@ -23,7 +23,7 @@ class Utilities
 
     // Returns a single value from an array of numbers
     // $attributes & $weightings must both be index arrays
-    static function singleValueFromArray($attributes, $weightings)
+    public static function singleValueFromArray($attributes, $weightings)
     {
         /* Each $attribute is multiplied by the corresponding value in the $weightings array (if there is one)
 

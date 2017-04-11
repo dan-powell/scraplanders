@@ -14,12 +14,17 @@ class UserSeeder extends Seeder
     {
         $test_user = factory(App\Models\User::class)->states('test')->create();
 
-        $test_user->group()->save(factory(App\Models\Group::class)->make());
+        $groups = factory(App\Models\Group::class, rand(1,3))->create();
+
+        $groups->each(function($group) use ($test_user) {
+            $test_user->groups()->save($group);
+        });
+
 
         $new_user = factory(App\Models\User::class, 1)->states('new')->create();
 
         $users = factory(App\Models\User::class, 4)->create()->each(function($i) {
-            $i->group()->save(factory(App\Models\Group::class)->make());
+            $i->groups()->save(factory(App\Models\Group::class)->make());
         });
 
     }

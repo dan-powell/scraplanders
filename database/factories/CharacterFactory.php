@@ -14,7 +14,7 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
     // Generate the stats
     $points = $faker->numberBetween(10, 20);
     $stats_array = config('character.stats');
-    $distribution = App\Repositories\Mechanics\Utilities::distributePoints(count($stats_array), $points);
+    $distribution = Utilities::distributePoints(count($stats_array), $points);
     $stats = [];
     for($i = 0; $i < count($stats_array); $i++) {
         $stats[$stats_array[$i]] = $distribution[$i];
@@ -26,13 +26,13 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
         'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'group_id' => function (array $post) {
-            return App\Models\Group::inRandomOrder()->first()->id;
+            return App\Models\Group::withoutGlobalScopes()->inRandomOrder()->first()->id;
         },
 
 	    'firstname' => $faker->firstName(),
         'lastname' => $faker->lastName(),
         'nickname' => $randomNameGen->getName(),
-        'dob' => $faker->dateTimeBetween($startDate = '-45 years', $endDate = '-18 years'),
+        'birthyear' => app('time')->year() - $faker->numberBetween(18, 60),
 
         'strength' => $stats['strength'],
         'toughness' => $stats['toughness'],
