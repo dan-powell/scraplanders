@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Scopes\CharacterOwnedByUserScope;
+use App\Models\Scopes\OwnedByUserScope;
 
 use App\Repositories\Mechanics\Utilities;
 use Carbon\Carbon;
@@ -21,7 +21,7 @@ class Character extends Model
         parent::boot();
 
         // Only return characters that are owned by user
-        static::addGlobalScope(new CharacterOwnedByUserScope);
+        static::addGlobalScope(new OwnedByUserScope('group'));
     }
 
     protected $fillable = [

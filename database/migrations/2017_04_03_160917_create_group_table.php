@@ -17,10 +17,10 @@ class CreateGroupTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('name');
-            $table->integer('scrap');
-            $table->integer('food');
-            $table->integer('water');
-            $table->integer('fuel');
+            $table->integer('scrap')->unsigned();
+            $table->integer('food')->unsigned();
+            $table->integer('water')->unsigned();
+            $table->integer('fuel')->unsigned();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

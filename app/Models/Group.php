@@ -3,17 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Scopes\OwnedByUserScope;
 
 class Group extends Model
 {
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $table = 'groups';
+    * The "booting" method of the model.
+    *
+    * @return void
+    */
+    protected static function boot()
+    {
+        parent::boot();
 
+        // Only return characters that are owned by user
+        static::addGlobalScope(new OwnedByUserScope());
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -6,8 +6,16 @@ use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class CharacterOwnedByUserScope implements Scope
+class OwnedByUserScope implements Scope
 {
+
+    private $intermediary;
+
+    public function __construct($intermediary = null)
+    {
+        $this->intermediary = $intermediary;
+    }
+
     /**
      * Apply the scope to a given Eloquent query builder.
      *
@@ -17,10 +25,16 @@ class CharacterOwnedByUserScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        $builder->whereHas('group', function ($builder) {
+        if($this->intermediary) {
+            $builder->whereHas($this->intermediary, function ($builder) {
+                $builder->whereHas('user', function ($query) {
+                    $query->where('id', '=', auth()->user()->id);
+                });
+            });
+        } else {
             $builder->whereHas('user', function ($query) {
                 $query->where('id', '=', auth()->user()->id);
             });
-        });
+        }
     }
 }
