@@ -18,14 +18,14 @@ class CharacterController extends Controller
     public function index()
     {
         return view('character.index.characterIndex')->with([
-            'characters' => $this->characterRepo->getUserCharacters()
+            'characters' => $this->characterRepo->all()
         ]);
     }
 
     public function show($id)
     {
         return view('character.show.characterShow')->with([
-            'character' => $this->characterRepo->getUserCharacter($id)
+            'character' => $this->characterRepo->get($id)
         ]);
     }
 

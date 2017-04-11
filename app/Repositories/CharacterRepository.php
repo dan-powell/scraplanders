@@ -15,17 +15,23 @@ class CharacterRepository
     }
 
     // Get all characters if owned by user
-    public function getUserCharacters() {
+    public function all() {
 
         return auth()->user()->characters()->get();
 
     }
 
     // Get specific character if owned by user
-    public function getUserCharacter($id) {
+    public function get($id) {
 
         return Character::findOrFail($id);
 
     }
 
+    // Get any character, regardless of ownership
+    public function getAny($id) {
+
+        return Character::withoutGlobalScopes()->findOrFail($id);
+
+    }
 }
