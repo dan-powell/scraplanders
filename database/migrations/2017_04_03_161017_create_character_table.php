@@ -45,6 +45,7 @@ class CreateCharacterTable extends Migration
 
             // $table->string('template');
 
+            $table->tinyInteger('batch')->unsigned();
             $table->timestamps();
             $table->foreign('group_id')->references('id')->on('groups');
         });

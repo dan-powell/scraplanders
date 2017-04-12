@@ -94,7 +94,7 @@ class Character extends Model
     // Age in years
     public function getAgeAttribute()
     {
-        return app('time')->year() - $this->birthyear;
+        return app('time')->getYear() - $this->birthyear;
     }
 
     // Returns just the stats of the character

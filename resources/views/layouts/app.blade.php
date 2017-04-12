@@ -79,7 +79,7 @@
 
                             @include('layouts.resources')
 
-                            <li>{{ app('time')->year() }}</li>
+                            <li>Year: {{ app('time')->getYear() }} Day: {{ app('time')->getDay() }}, Hour: {{ app('time')->getHour() }}</li>
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

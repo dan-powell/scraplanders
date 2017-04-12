@@ -32,7 +32,7 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
 	    'firstname' => $faker->firstName(),
         'lastname' => $faker->lastName(),
         'nickname' => $randomNameGen->getName(),
-        'birthyear' => app('time')->year() - $faker->numberBetween(18, 60),
+        'birthyear' => app('time')->getYear() - $faker->numberBetween(18, 60),
 
         'strength' => $stats['strength'],
         'toughness' => $stats['toughness'],
@@ -56,7 +56,7 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
         'goodness' => $faker->numberBetween(-10, 10),
         //'temperment' => $faker->numberBetween(-10, 10),
 
-        //'template' => $faker->randomElement(array_keys(config('character.templates'))),
+        'batch' => $faker->numberBetween(0, 11)
 
     ];
 });
