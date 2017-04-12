@@ -28,9 +28,6 @@ class TimeService
 
     }
 
-
-
-
     public function update() {
         $hour = Redis::incr('time.hour');
 

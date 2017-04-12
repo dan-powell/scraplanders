@@ -3,6 +3,8 @@
 // All settings related to character
 return [
 
+    'batch_segments' => 6,
+
     // Various settings for character stats
     'stats' => [
         'strength',

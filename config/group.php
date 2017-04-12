@@ -3,6 +3,7 @@
 
 return [
 
+    'batch_segments' => 6,
 
     'resources' => [
         'scrap',
@@ -10,6 +11,7 @@ return [
         'water',
         'fuel',
     ],
+
 
 
 ];

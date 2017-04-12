@@ -56,7 +56,7 @@ $factory->define(App\Models\Character::class, function (Faker\Generator $faker) 
         'goodness' => $faker->numberBetween(-10, 10),
         //'temperment' => $faker->numberBetween(-10, 10),
 
-        'batch' => $faker->numberBetween(0, 11)
+        'batch' => $faker->numberBetween(0, config('character.batch_segments') - 1),
 
     ];
 });

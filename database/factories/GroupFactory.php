@@ -8,11 +8,14 @@ $factory->define(App\Models\Group::class, function (Faker\Generator $faker) {
     return [
         'created_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
         'updated_at' => $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'),
+
 	    'name' => $randomNameGen->getName(),
         'scrap' => $faker->numberBetween(0, 100),
         'food' => $faker->numberBetween(0, 100),
         'water' => $faker->numberBetween(0, 100),
         'fuel' => $faker->numberBetween(0, 100),
+
+        'batch' => $faker->numberBetween(0, config('group.batch_segments') - 1),
     ];
 });
 

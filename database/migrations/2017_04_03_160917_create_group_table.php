@@ -21,6 +21,8 @@ class CreateGroupTable extends Migration
             $table->integer('food')->unsigned();
             $table->integer('water')->unsigned();
             $table->integer('fuel')->unsigned();
+
+            $table->tinyInteger('batch')->unsigned();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

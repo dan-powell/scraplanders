@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Repositories\GroupRepository;
+use App\Jobs\UpdateGroupResources;
 
 class UpdateResources extends Command
 {
@@ -42,6 +43,8 @@ class UpdateResources extends Command
      */
     public function handle()
     {
-        $this->groupRepo->updateResources();
+
+        dispatch(new UpdateGroupResources($this->groupRepo));
+
     }
 }
