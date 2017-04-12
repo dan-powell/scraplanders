@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('dashboard');
     }
 
 
@@ -39,7 +39,7 @@ class HomeController extends Controller
 
         \Notification::successInstant($character->name . ' created.');
 
-        return view('home');
+        return view('dashboard');
     }
 
 }
