@@ -12,7 +12,7 @@ class ViewComposerServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->app->view->composer(
-            'layouts.resources',
+            'partials.resources',
             'App\Http\ViewComposers\UserResourcesComposer'
         );
     }

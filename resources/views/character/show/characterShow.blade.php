@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     <div class="row">
                         @foreach($character->stats as $key => $stat)
-                        <div class="col-xs-4 text-right">@lang('character.' . $key)</div>
+                        <div class="col-xs-4 text-right">@lang('character.' . $key) <span class="{{ config('ui.stat_icons.' . $key) }}"></span></div>
                         <div class="col-xs-8">
                             <div class="progress">
                                 <div class="progress-bar"
@@ -44,7 +44,7 @@
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading"><strong>Health</strong></div>
+                <div class="panel-heading"><strong><span class="game-icon game-icon-anchor"></span>Health</strong></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-xs-2 text-right"><strong>HP</strong></div>

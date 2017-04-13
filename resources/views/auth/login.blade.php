@@ -7,7 +7,7 @@
 @section('body')
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url() }}">{{ config('app.name') }}</a>
+            <a href="{{ url('/') }}">{{ config('app.name') }}</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
