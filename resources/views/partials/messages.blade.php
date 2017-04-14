@@ -12,7 +12,7 @@
 
                 @foreach($messages as $message)
                     <li><!-- start message -->
-                        <a href="#" class="bg-{{ $message->type }}">
+                        <a href="{{ route('messages.show', $message->id) }}" class="bg-{{ $message->type }}">
                             <div class="pull-left">
 
                             </div>

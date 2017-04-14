@@ -13,6 +13,12 @@
                 </a>
             </li>
 
+            <li class="">
+                <a href="{{ route('messages.index') }}">
+                    <i class="fa fa-envelope"></i> <span>Messages</span>
+                </a>
+            </li>
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-forward"></i> <span>Actions</span>
