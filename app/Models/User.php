@@ -38,7 +38,10 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Models\Character', 'App\Models\Group');
     }
 
-
+    public function vehicles()
+    {
+        return $this->hasManyThrough('App\Models\Vehicle', 'App\Models\Group');
+    }
 
 
     /****************

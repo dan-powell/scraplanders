@@ -16,4 +16,12 @@ return [
         'luck' => 'game-icon game-icon-open-treasure-chest'
     ],
 
+
+    'resource_icons' => [
+        'food' => 'game-icon game-icon-opened-food-can',
+        'water' => 'game-icon game-icon-water-drop',
+        'scrap' => 'game-icon game-icon-car-wheel',
+        'fuel' => 'game-icon game-icon-jerrycan',
+    ],
+
 ];

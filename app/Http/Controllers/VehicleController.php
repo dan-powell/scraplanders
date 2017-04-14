@@ -3,39 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Vehicle;
+use App\Repositories\VehicleRepository;
 
 class VehicleController extends Controller
 {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $repo;
+
+    public function __construct(VehicleRepository $repo)
     {
-        //$this->middleware('auth');
+        $this->repo = $repo;
     }
 
-    /**
-     * Show the unit index
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $user = \Auth::user();
-
         return view('vehicle.index.vehicleIndex')->with([
-            'vehicles' => $user->group->vehicles
+            'vehicles' => $this->repo->all()
         ]);
     }
 
     public function show($id)
     {
         return view('vehicle.show.vehicleShow')->with([
-            'vehicle' => Vehicle::findOrFail($id)
+            'vehicle' => $this->repo->get($id)
         ]);
     }
 

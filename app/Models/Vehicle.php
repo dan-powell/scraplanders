@@ -3,9 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Scopes\OwnedByUserScope;
 
 class Vehicle extends Model
 {
+
+    /**
+    * The "booting" method of the model.
+    *
+    * @return void
+    */
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Only return characters that are owned by user
+        static::addGlobalScope(new OwnedByUserScope('group'));
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +39,11 @@ class Vehicle extends Model
 	{
 		return $this->belongsTo('App\Models\Group');
 	}
+
+    public function user()
+    {
+        return $this->group->user();
+    }
 
 
     /****************
