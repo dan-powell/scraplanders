@@ -11,9 +11,15 @@ class ViewComposerServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+        // Resources
         $this->app->view->composer(
-            'partials.resources',
+            ['partials.resources'],
             'App\Http\ViewComposers\UserResourcesComposer'
+        );
+
+        $this->app->view->composer(
+            ['partials.messages'],
+            'App\Http\ViewComposers\UserMessagesComposer'
         );
     }
 }

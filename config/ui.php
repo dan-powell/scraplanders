@@ -3,6 +3,28 @@
 return [
 
 
+
+    // messages
+
+    'messages' => [
+        'types' => [
+            'success',
+            'warning',
+            'danger',
+            'info',
+        ]
+    ],
+
+
+
+    
+
+
+
+
+
+    // Icons
+
     'stat_icons' => [
         'strength' => 'game-icon game-icon-muscle-up',
         'toughness' => 'game-icon game-icon-target-dummy',
@@ -15,7 +37,6 @@ return [
         'perception' => 'game-icon game-icon-look-at',
         'luck' => 'game-icon game-icon-open-treasure-chest'
     ],
-
 
     'resource_icons' => [
         'food' => 'game-icon game-icon-opened-food-can',

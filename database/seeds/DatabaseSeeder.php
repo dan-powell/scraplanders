@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
         DB::table('groups')->truncate();
         DB::table('characters')->truncate();
         DB::table('vehicles')->truncate();
+        DB::table('messages')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
