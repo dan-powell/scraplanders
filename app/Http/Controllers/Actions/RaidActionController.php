@@ -6,17 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Actions\RaidActionEnactRequest;
 
 use App\Repositories\Actions\RaidActionRepository;
-
-use App\Models\Group;
+use App\Repositories\GroupRepository;
+use App\Repositories\CharacterRepository;
 
 class RaidActionController extends Controller
 {
 
     protected $repository;
+    protected $groupRepository;
+    protected $characterRepository;
 
-    public function __construct(RaidActionRepository $RaidActionRepository)
+    public function __construct(RaidActionRepository $RaidActionRepository, GroupRepository $GroupRepository, CharacterRepository $CharacterRepository)
     {
         $this->repository = $RaidActionRepository;
+        $this->groupRepository = $GroupRepository;
+        $this->characterRepository = $CharacterRepository;
     }
 
     /**
@@ -26,11 +30,9 @@ class RaidActionController extends Controller
      */
     public function setup()
     {
-        $user = \Auth::user();
-
         return view('action.raid.setup.actionRaidSetup')->with([
-            'characters' => $user->group->characters,
-            'groups' => Group::get()
+            'characters' => $this->characterRepository->all(),
+            'groups' => $this->groupRepository->allAny()
         ]);
     }
 

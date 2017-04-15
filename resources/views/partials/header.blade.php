@@ -36,4 +36,11 @@
         ]) !!};
     </script>
 
+    <style>
+        .content-wrapper, .right-side {
+            background-image: url("{{ url('img/bg.jpg') }}");
+            background-size: cover;
+        }
+    </style>
+
 </head>

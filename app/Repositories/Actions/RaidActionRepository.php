@@ -15,11 +15,11 @@ class RaidActionRepository
         // SETUP
 
         // Get defenders
-        $defending_group = Group::with(['characters'])->findOrFail($group_id);
+        $defending_group = Group::withoutGlobalScopes()->with(['characters'])->findOrFail($group_id);
         $defenders = $defending_group->characters;
 
         // Get raiders
-        $raiders = Character::findOrFail($characters);
+        $raiders = Character::withoutGlobalScopes()->findOrFail($characters);
 
         // INFILTRATION - find the total number of enemy characters that are alerted
 
