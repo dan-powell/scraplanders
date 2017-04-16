@@ -91,6 +91,17 @@ class Character extends Model
         return $this->firstname . ' ' . $this->lastname;
     }
 
+    // The full name
+    public function getFullNameAttribute()
+    {
+        if(isset($this->nickname)) {
+            return $this->firstname . ' "' . $this->nickname .' "' . $this->lastname;
+        }
+        else {
+            return $this->firstname . ' ' . $this->lastname;
+        }
+    }
+
     // Age in years
     public function getAgeAttribute()
     {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Time;
 
 use Illuminate\Console\Command;
 
-class UpdateTime extends Command
+class TimeUpdate extends Command
 {
 
     protected $groupRepo;
@@ -21,7 +21,7 @@ class UpdateTime extends Command
      *
      * @var string
      */
-    protected $description = 'Updates time & year';
+    protected $description = 'Increments time & year by value set in config';
 
     /**
      * Create a new command instance.

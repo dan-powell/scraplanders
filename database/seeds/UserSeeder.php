@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
         $test_user = factory(App\Models\User::class)->states('test')->create();
 
         // Give them some messages
-        $messages = factory(App\Models\Ui\Message::class, rand(3,6))->create();
+        $messages = factory(App\Models\Ui\Message::class, rand(3,6))->make();
         $messages->each(function($message) use ($test_user) {
             $test_user->messages()->save($message);
         });

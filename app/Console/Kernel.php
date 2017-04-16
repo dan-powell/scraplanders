@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\UpdateResources::class,
-        Commands\UpdateTime::class
+        Commands\Time\TimeUpdate::class,
+        Commands\Time\TimeSet::class
     ];
 
     /**
@@ -25,9 +26,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('resources:update')->everyMinute();
+        $schedule->command('resources:update')->hourly();
 
-        $schedule->command('time:update')->everyMinute();
+        // Update the time every 20 minutes
+        //$schedule->command('time:update')->cron('*/20 * * * * *');
+
+        // Update the time every 5 minutes
+        $schedule->command('time:update')->everyFiveMinutes();
     }
 
     /**

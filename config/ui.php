@@ -17,7 +17,7 @@ return [
 
 
 
-    
+
 
 
 
@@ -28,7 +28,7 @@ return [
     'stat_icons' => [
         'strength' => 'game-icon game-icon-muscle-up',
         'toughness' => 'game-icon game-icon-target-dummy',
-        'constitution' => 'game-icon game-icon-heart-inside',
+        'constitution' => 'game-icon game-icon-hearts',
         'dexterity' => 'game-icon game-icon-bowman',
         'intelligence' => 'game-icon game-icon-brain',
         'wisdom' => 'game-icon game-icon-open-book',

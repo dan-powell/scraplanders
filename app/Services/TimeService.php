@@ -7,52 +7,85 @@ class TimeService
 {
 
     private $start_year;
-    private $hour;
+    private $minutes;
 
     public function __construct()
     {
 
-        $this->start_year = config('general.epoch');
+        $this->start_year = config('general.time.start_year');
 
-        $this->hour = Redis::get('time.hour');
+        // Get the number of minutes elapsed from Redis
+        $this->minutes = Redis::get('system.minutes');
 
-        if(!$this->hour) {
-            $hour = Setting::find('day');
+        // If minutes are not found
+        if(!$this->minutes) {
 
-            if ($hour) {
-                Redis::set('time.hour', $hour->value * 24);
+            // Check for a value saved in the database
+            $hours = Setting::find('hours_elapsed');
+
+            if ($hours) {
+                // If the database has a value, update Redis
+                Redis::set('system.minutes', $hours->value * 60);
             } else {
-                Redis::set('time.hour', 0);
+                // Otherwise set the time to 0
+                Redis::set('system.minutes', 0);
+                $this->minutes = 0;
             }
         }
 
     }
 
+    // Update the time
     public function update() {
-        $hour = Redis::incr('time.hour');
+        // Save minutes to Redis
+        $time = Redis::incrby('system.minutes', config('general.time.minutes_every_update'));
 
-        // Every 24 hours update the day in the database
-        if(($hour % 24) == 0) {
-            $this->updateDay();
+        // Every 60 minutes, update the hour in the database
+        if(($time % 60) == 0) {
+            $this->saveHour();
         }
 
     }
 
-    public function updateDay() {
-        Setting::updateOrCreate(['id' => 'day'], ['key' => 'day', 'value' => $this->getDay() + 1]);
+
+    public function setMinutes($minutes) {
+
+        // Save minutes to Redis
+        Redis::set('system.minutes', $minutes);
+
+        $this->minutes = $minutes;
+
+        // Every 60 minutes, update the hour in the database
+        if(($minutes % 60) == 0) {
+            $this->saveHour();
+        }
+
     }
 
 
+    // Save the hour to the database
+    private function saveHour() {
+        Setting::updateOrCreate(['id' => 'hours_elapsed'], ['key' => 'hours_elapsed', 'value' => $this->getHour() + 1]);
+    }
+
+    // Get the current year
     public function getYear() {
-        return floor($this->start_year + (($this->hour / 24) / 365));
+        return floor($this->start_year + ((($this->minutes / 60) / 24) / 365));
     }
 
+    // Get the day of the year
     public function getDay() {
-        return ($this->hour / 24) % 365;
+        return ((($this->minutes / 60) / 24) % 365) + 1;
     }
 
+    // Get the hour of the day
     public function getHour() {
-        return $this->hour % 24;
+        return ($this->minutes / 60) % 24;
+    }
+
+    // Get the minutes of the hour
+    public function getMinute() {
+        return ($this->minutes) % 60;
     }
 
 }

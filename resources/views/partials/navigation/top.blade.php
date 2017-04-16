@@ -13,7 +13,7 @@
             <li class="dropdown user user-menu">
                 <a href="#">
                     <span class="fa fa-clock-o"></span>
-                    {{ app('time')->getHour() }}:00
+                    {{ app('time')->getHour() }}:{{ app('time')->getMinute() }}
                 </a>
             </li>
 
