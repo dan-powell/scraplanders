@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Character;
+use App\Jobs\CharacterEncounter;
 
 class DashboardController extends Controller
 {
@@ -37,6 +39,19 @@ class DashboardController extends Controller
         ]);
 
         \Notification::successInstant($character->name . ' created.');
+
+        return view('dashboard.dashboard');
+    }
+
+    public function updateCharacters()
+    {
+        $characters = Character::withoutGlobalScopes()->get();
+
+        foreach($characters as $character) {
+            dispatch(new CharacterEncounter($character));
+        }
+
+        \Notification::successInstant('processing ' . count($characters) . ' characters');
 
         return view('dashboard.dashboard');
     }

@@ -12,6 +12,6 @@ class CharacterSeeder extends Seeder
      */
     public function run()
     {
-        $units = factory(App\Models\Character::class, 100)->create();
+        $units = factory(App\Models\Character::class, 5000)->create();
     }
 }

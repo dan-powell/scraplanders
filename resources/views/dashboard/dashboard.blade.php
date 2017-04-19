@@ -4,6 +4,9 @@
     <!-- Main content -->
     <section class="content">
 
+
+        <a href="{{ route('dashboard.updateCharacters') }}">Update Characters</a>
+
         {{--
 
         <!-- Info boxes -->

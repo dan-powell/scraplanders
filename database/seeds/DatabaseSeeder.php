@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->truncate();
         DB::table('groups')->truncate();
-        DB::table('characters')->truncate();
+        //DB::table('characters')->truncate();
         DB::table('vehicles')->truncate();
         DB::table('messages')->truncate();
 

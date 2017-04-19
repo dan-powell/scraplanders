@@ -22,6 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('addCharacter', 'DashboardController@addCharacter')->name('dashboard.addcharacter');
+    Route::get('updateCharacters', 'DashboardController@updateCharacters')->name('dashboard.updateCharacters');
 
     Route::resource('messages', 'MessageController');
 
