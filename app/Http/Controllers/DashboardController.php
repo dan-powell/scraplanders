@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Group;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        return view('dashboard.dashboard');
     }
 
 
@@ -39,7 +38,7 @@ class HomeController extends Controller
 
         \Notification::successInstant($character->name . ' created.');
 
-        return view('dashboard');
+        return view('dashboard.dashboard');
     }
 
 }

@@ -1,6 +1,6 @@
 <?php namespace App\Services;
 
-use App\Repositories\GroupRepository;
+use App\Repositories\Models\GroupRepository;
 
 use Redis;
 

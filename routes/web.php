@@ -11,26 +11,23 @@
 |
 */
 
+//
 Route::get('/', function () {
-    return view('welcome');
+    return view('public.home.home');
 });
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/home', 'HomeController@index')->name('dashboard');
-    Route::get('addCharacter', 'HomeController@addCharacter')->name('dashboard.addcharacter');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('addCharacter', 'DashboardController@addCharacter')->name('dashboard.addcharacter');
 
     Route::resource('messages', 'MessageController');
 
-    Route::get('group/own', 'GroupController@own')->name('group.own');
     Route::resource('group', 'GroupController');
-
     Route::resource('characters', 'CharacterController');
     Route::resource('vehicles', 'VehicleController');
-
-
 
     Route::group(['prefix' => 'action', 'middleware' => 'auth'], function () {
         Route::get('raid', 'Actions\RaidActionController@setup')->name('action.raid');

@@ -18,8 +18,8 @@ class CreateGroupTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->string('name');
             $table->integer('scrap')->unsigned();
-            $table->integer('food')->unsigned();
-            $table->integer('water')->unsigned();
+            $table->decimal('food')->unsigned();
+            $table->decimal('water')->unsigned();
             $table->integer('fuel')->unsigned();
 
             $table->tinyInteger('batch')->unsigned();

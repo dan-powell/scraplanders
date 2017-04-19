@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Resources;
 
 use Illuminate\Console\Command;
-use App\Repositories\GroupRepository;
+use App\Repositories\Models\GroupRepository;
 use App\Jobs\UpdateGroupResources;
 
-class UpdateResources extends Command
+class GroupConsumptionUpdate extends Command
 {
 
-    protected $groupRepo;
+    protected $repo;
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'resources:update';
+    protected $signature = 'group:consume {--queue}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Updates resources';
+    protected $description = 'Characters in group consume resources';
 
     /**
      * Create a new command instance.
@@ -33,7 +33,7 @@ class UpdateResources extends Command
     public function __construct(GroupRepository $groupRepo)
     {
         parent::__construct();
-        $this->groupRepo = $groupRepo;
+        $this->repo = $groupRepo;
     }
 
     /**
@@ -43,8 +43,11 @@ class UpdateResources extends Command
      */
     public function handle()
     {
-
-        dispatch(new UpdateGroupResources($this->groupRepo));
-
+        if ($this->option('queue')) {
+            // Send the job to the queue
+            dispatch(new UpdateGroupResources($this->repo));
+        } else {
+            $this->repo->consumptionUpdate();
+        }
     }
 }

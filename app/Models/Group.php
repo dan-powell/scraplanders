@@ -53,6 +53,11 @@ class Group extends Model
         return $this->hasMany('App\Models\Character');
     }
 
+    public function charactersAll()
+    {
+        return $this->hasMany('App\Models\Character')->withoutGlobalScopes();
+    }
+
     public function vehicles()
     {
         return $this->hasMany('App\Models\Vehicle');

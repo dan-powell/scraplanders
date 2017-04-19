@@ -25,16 +25,20 @@ class OwnedByUserScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        if($this->intermediary) {
-            $builder->whereHas($this->intermediary, function ($builder) {
+        if(auth()->user()) {
+            if($this->intermediary) {
+                $builder->whereHas($this->intermediary, function ($builder) {
+                    $builder->whereHas('user', function ($query) {
+                        $query->where('id', '=', auth()->user()->id);
+                    });
+                });
+            } else {
                 $builder->whereHas('user', function ($query) {
                     $query->where('id', '=', auth()->user()->id);
                 });
-            });
+            }
         } else {
-            $builder->whereHas('user', function ($query) {
-                $query->where('id', '=', auth()->user()->id);
-            });
+            
         }
     }
 }

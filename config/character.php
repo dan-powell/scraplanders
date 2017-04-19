@@ -38,6 +38,7 @@ return [
     'health' => [
         // Used to define the max HP based on stats
         'multiplier' => 10,
+        'food_consumption_per_day' => 3
     ],
 
 

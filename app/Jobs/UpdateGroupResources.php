@@ -8,13 +8,13 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-use App\Repositories\GroupRepository;
+use App\Repositories\Models\GroupRepository;
 
 class UpdateGroupResources implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $groupRepo;
+    private $repo;
 
     /**
      * Create a new job instance.
@@ -23,7 +23,7 @@ class UpdateGroupResources implements ShouldQueue
      */
      public function __construct(GroupRepository $groupRepo)
      {
-         $this->groupRepo = $groupRepo;
+         $this->repo = $groupRepo;
      }
 
     /**
@@ -33,6 +33,6 @@ class UpdateGroupResources implements ShouldQueue
      */
     public function handle()
     {
-        $this->groupRepo->updateResources();
+        $this->repo->consumptionUpdate();
     }
 }
